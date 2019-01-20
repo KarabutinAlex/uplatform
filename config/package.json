@@ -1,0 +1,32 @@
+{
+  "name": "@uplatform/config",
+  "version": "0.0.11",
+  "description": "uPlatfrom - Config Module",
+  "main": "src/index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarabutinAlex/uplatform.git"
+  },
+  "keywords": [
+    "uplatform",
+    "config"
+  ],
+  "authors": [
+    {
+      "name": "Karabutin Alex",
+      "email": "karabutin.alex@nexode.org"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarabutinAlex/uplatform/issues"
+  },
+  "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
+  "dependencies": {
+    "config": "^3.0.1",
+    "js-yaml": "^3.12.1"
+  }
+}
