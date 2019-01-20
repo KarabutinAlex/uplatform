@@ -3,7 +3,7 @@ const up = require('./bootstrap');
 up.eventBus.consume(
     'hello', 
     ({ id, payload, tags }, ack) => {
-        console.log('#hello:', { id, payload, tags });
+        up.logger.info('Message "hello": %o', { id, payload, tags });
         ack();
     },
 );

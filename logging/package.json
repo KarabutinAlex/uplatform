@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/logging",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "uPlatform - Logging Module",
   "main": "src/index.js",
   "repository": {
@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/core": "0.0.19",
-    "@uplatform/config": "0.0.19",
+    "@uplatform/core": "0.0.20",
+    "@uplatform/config": "0.0.20",
     "winston": "^3.1.0"
   }
 }

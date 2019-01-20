@@ -32,7 +32,7 @@ class KafkaEventBus {
         });
 
         producer.on('event.error', error => {
-            this.logger.error('Producer Error: %s', error.message);
+            this.logger.captureException(error);
         });
 
         return producer;
@@ -68,7 +68,7 @@ class KafkaEventBus {
             
             handler(message, error => {
                 if (error) {
-                    return console.error({ error, tags: message.tags });
+                    return this.logger.captureException(error);
                 }
 
                 consumer.commitMessage(data);
@@ -76,7 +76,7 @@ class KafkaEventBus {
         });
 
         consumer.on('event.error', error => {
-            this.logger.error('Error from consumer: %s', error.message);
+            this.logger.captureException(error);
         });
 
         return consumer;
@@ -121,7 +121,7 @@ class KafkaEventBus {
                 Date.now(),
             );
         } catch (error) {
-            this.logger.error('Sending message error: %s', error.message);
+            this.logger.captureException(error);
         }
     }
 }

@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/config": "0.0.18",
-    "@uplatform/core": "0.0.18",
-    "@uplatform/event-bus": "0.0.18",
-    "@uplatform/http": "0.0.18",
-    "@uplatform/logging": "0.0.18"
+    "@uplatform/config": "0.0.20",
+    "@uplatform/core": "0.0.20",
+    "@uplatform/event-bus": "0.0.20",
+    "@uplatform/http": "0.0.20",
+    "@uplatform/logging": "0.0.20"
   }
 }
