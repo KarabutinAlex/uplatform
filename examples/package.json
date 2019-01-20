@@ -1,19 +1,11 @@
 {
-  "name": "@uplatform/config",
-  "version": "0.0.14",
-  "description": "uPlatfrom - Config Module",
-  "main": "src/index.js",
-  "directories": {
-    "example": "examples"
-  },
+  "name": "@uplatform/examples",
+  "version": "0.0.13",
+  "description": "uPlatform - Examples",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KarabutinAlex/uplatform.git"
   },
-  "keywords": [
-    "uplatform",
-    "config"
-  ],
   "authors": [
     {
       "name": "Karabutin Alex",
@@ -26,8 +18,8 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
+    "@uplatform/config": "0.0.14",
     "@uplatform/core": "0.0.14",
-    "config": "^3.0.1",
-    "js-yaml": "^3.12.1"
+    "@uplatform/http": "0.0.14"
   }
 }

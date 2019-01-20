@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/core",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "uPlatform - Core module",
   "main": "src/index.js",
   "types": "src/index.d.ts",

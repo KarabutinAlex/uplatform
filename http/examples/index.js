@@ -8,7 +8,7 @@ const server = up.http.create();
 server.get(
     '/greeting',
     async (request, reply) => {
-        const greeting = await Promise.resolve('Hello!');
+        const greeting = await Promise.resolve('Hello!')
         reply.json({ greeting });
     },
 );

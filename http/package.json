@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/http",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "uPlatform - HTTP Module",
   "main": "src/index.js",
   "directories": {
@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/config": "0.0.13",
-    "@uplatform/core": "0.0.13",
+    "@uplatform/config": "0.0.14",
+    "@uplatform/core": "0.0.14",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
