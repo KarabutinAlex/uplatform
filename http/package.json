@@ -1,7 +1,7 @@
 {
-  "name": "@uplatform/config",
+  "name": "@uplatform/http",
   "version": "0.0.13",
-  "description": "uPlatfrom - Config Module",
+  "description": "uPlatform - HTTP Module",
   "main": "src/index.js",
   "directories": {
     "example": "examples"
@@ -12,7 +12,7 @@
   },
   "keywords": [
     "uplatform",
-    "config"
+    "http"
   ],
   "authors": [
     {
@@ -26,8 +26,12 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
+    "@uplatform/config": "0.0.13",
     "@uplatform/core": "0.0.13",
-    "config": "^3.0.1",
-    "js-yaml": "^3.12.1"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "express-promise-router": "^3.0.3",
+    "morgan": "^1.9.1"
   }
 }
