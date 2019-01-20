@@ -1,0 +1,6 @@
+eventBus:
+  id: examples.eventBus.simple-consumer
+  brokers: 
+  - localhost:9092
+  topics:
+  - test

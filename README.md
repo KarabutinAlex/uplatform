@@ -8,3 +8,7 @@
 ## Description
 
 μPlatform is an event-driven application framework.
+
+## Authors
+
+* Karabutin Alex <karabutin.alex@nexode.org>

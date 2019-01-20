@@ -1,4 +1,5 @@
 const { KafkaConsumer, Producer } = require('node-rdkafka');
+const uuidv4 = require('uuid/v4');
 
 class KafkaEventBus {
 
@@ -14,18 +15,19 @@ class KafkaEventBus {
             groupId,
             brokers,
             topics,
-        })
+        });
+
+        this.connect();
     }
 
-    createProducer() {
+    createProducer({ brokers }) {
         const producer = new Producer({
             'metadata.broker.list': brokers.join(','),
             'dr_cb': true
         });
 
-        producer.on('ready', () => {
-            // ...
-        });
+        producer.on('ready', () => console.log('producer is ready'));
+        producer.on('event.error', error => console.error('Error from producer:', error));
 
         return producer;
     }
@@ -63,14 +65,28 @@ class KafkaEventBus {
                 consumer.commitMessage(data);
             });
         });
+
+        consumer.on('event.error', error => {
+            console.error('Error from consumer:', error);
+        });
+
+        return consumer;
     }
 
     connect() {
         this.consumer.connect();
         this.producer.connect();
+        this.producerPoller = setInterval(
+            () => this.producer.poll(), 
+            1000,
+        );
     }
 
     disconnect() {
+        if (this.producerPoller) {
+            clearInterval(this.producerPoller);
+        }
+
         this.producer.disconnect();
         this.consumer.disconnect();
     }
@@ -80,20 +96,25 @@ class KafkaEventBus {
     }
 
     publish(topic, { type, payload, tags = {}, shardingValue = null }) {
-        this.producer.produce(
-            topic,
-            null,
-            Buffer.from(
-                JSON.stringify({
-                    id: '',
-                    type,
-                    payload,
-                    tags,
-                })
-            ),
-            shardingValue,
-            Date.now(),
-        );
+        try {
+            this.producer.produce(
+                topic,
+                -1,
+                Buffer.from(
+                    JSON.stringify({
+                        id: uuidv4(),
+                        type,
+                        payload,
+                        tags,
+                    })
+                ),
+                shardingValue,
+                Date.now(),
+            );
+        } catch (error) {
+            console.error('A problem occurred when sending our message');
+            console.error(err);
+        }
     }
 }
 

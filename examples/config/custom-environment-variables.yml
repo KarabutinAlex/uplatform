@@ -1,0 +1,2 @@
+eventBus:
+  brokers: KAFKA_BROKERS
