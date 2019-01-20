@@ -4,3 +4,6 @@ eventBus:
   - localhost:9092
   topics:
   - test
+
+logger:
+  level: info

@@ -1,5 +1,5 @@
 #!/bin/bash
-packages=( core config http event-bus )
+packages=( core config logging http event-bus )
 
 for package in "${packages[@]}"
 do

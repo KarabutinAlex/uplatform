@@ -58,7 +58,7 @@ class KafkaEventBus {
         });
 
         consumer.on('data', data => {
-            this.logger.debug('Received a message (%d bytes) from %s', data.size, data.topic);
+            this.logger.debug('Received a message (%d bytes) from "%s"', data.size, data.topic);
 
             const message = JSON.parse(data.value.toString());
 
@@ -76,7 +76,7 @@ class KafkaEventBus {
         });
 
         consumer.on('event.error', error => {
-            console.error('Error from consumer:', error);
+            this.logger.error('Error from consumer: %s', error.message);
         });
 
         return consumer;
@@ -121,8 +121,7 @@ class KafkaEventBus {
                 Date.now(),
             );
         } catch (error) {
-            console.error('A problem occurred when sending our message');
-            console.error(err);
+            this.logger.error('Sending message error: %s', error.message);
         }
     }
 }

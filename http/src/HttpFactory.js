@@ -5,6 +5,10 @@ const cookieParser = require('cookie-parser');
 
 class HttpFactory {
 
+    constructor(logger) {
+        this.logger = logger;
+    }
+
     create({
         enableLogging = true,
         enableBodyParser = true,
@@ -31,6 +35,8 @@ class HttpFactory {
                 const address = server.address();
 
                 setImmediate(() => app.emit('listening', address));
+
+                this.logger.info(`Server started listening at %d port.`, address.port);
 
                 return app;
             },
