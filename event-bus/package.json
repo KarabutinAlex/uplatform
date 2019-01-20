@@ -1,18 +1,16 @@
 {
-  "name": "@uplatform/config",
+  "name": "@uplatform/event-bus",
   "version": "0.0.15",
-  "description": "uPlatfrom - Config Module",
+  "description": "uPlatform - Event Bus Module",
   "main": "src/index.js",
-  "directories": {
-    "example": "examples"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KarabutinAlex/uplatform.git"
   },
   "keywords": [
-    "uplatform",
-    "config"
+    "event",
+    "bus",
+    "uplatform"
   ],
   "authors": [
     {
@@ -26,8 +24,8 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
+    "@uplatform/config": "0.0.15",
     "@uplatform/core": "0.0.15",
-    "config": "^3.0.1",
-    "js-yaml": "^3.12.1"
+    "node-rdkafka": "^2.5.1"
   }
 }
