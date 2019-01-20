@@ -1,6 +1,7 @@
 const { up } = require('@uplatform/core');
 
 require('@uplatform/config');
+require('@uplatform/logger');
 
 const { KafkaEventBus } = require('./KafkaEventBus');
 
@@ -9,9 +10,12 @@ up.module('eventBus', () => {
     const brokers = up.config.get('eventBus.brokers');
     const topics = up.config.get('eventBus.topics');
 
-    return new KafkaEventBus({
-        groupId,
-        topics,
-        brokers: typeof brokers === 'string' ? brokers.split(',') : brokers,
-    });
+    return new KafkaEventBus(
+        up.logger,
+        {
+            groupId,
+            topics,
+            brokers: typeof brokers === 'string' ? brokers.split(',') : brokers,
+        }
+    );
 });

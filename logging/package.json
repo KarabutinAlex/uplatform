@@ -1,18 +1,16 @@
 {
-  "name": "@uplatform/http",
+  "name": "@uplatform/logging",
   "version": "0.0.18",
-  "description": "uPlatform - HTTP Module",
+  "description": "uPlatform - Logging Module",
   "main": "src/index.js",
-  "directories": {
-    "example": "examples"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KarabutinAlex/uplatform.git"
   },
   "keywords": [
-    "uplatform",
-    "http"
+    "logging",
+    "error tracking",
+    "uplatform"
   ],
   "authors": [
     {
@@ -26,12 +24,7 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/config": "0.0.18",
-    "@uplatform/core": "0.0.18",
-    "body-parser": "^1.18.3",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.16.4",
-    "express-promise-router": "^3.0.3",
-    "morgan": "^1.9.1"
+    "@uplatform": "0.0.18",
+    "winston": "^3.1.0"
   }
 }

@@ -9,6 +9,14 @@
 
 μPlatform is an event-driven application framework.
 
+Framework consists of next modules:
+
+* Core
+* Config
+* Logging
+* HTTP
+* Event Bus
+
 ## Authors
 
 * Karabutin Alex <karabutin.alex@nexode.org>

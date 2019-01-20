@@ -3,7 +3,8 @@ const uuidv4 = require('uuid/v4');
 
 class KafkaEventBus {
 
-    constructor({ groupId, brokers, topics }) {
+    constructor(logger, { groupId, brokers, topics }) {
+        this.logger = logger;
         this.handlers = new Map();
         this.groupId = groupId;
         this.brokers = brokers;
@@ -26,8 +27,13 @@ class KafkaEventBus {
             'dr_cb': true
         });
 
-        producer.on('ready', () => console.log('producer is ready'));
-        producer.on('event.error', error => console.error('Error from producer:', error));
+        producer.on('ready', () => {
+            this.logger.verbose('Producer is ready.');
+        });
+
+        producer.on('event.error', error => {
+            this.logger.error('Producer Error: %s', error.message);
+        });
 
         return producer;
     }
@@ -46,11 +52,14 @@ class KafkaEventBus {
         );
 
         consumer.on('ready', () => {
+            this.logger.verbose('Consumer is ready.');
             consumer.subscribe(topics);
             consumer.consume();
         });
 
         consumer.on('data', data => {
+            this.logger.debug('Received a message (%d bytes) from %s', data.size, data.topic);
+
             const message = JSON.parse(data.value.toString());
 
             if (!handlers.has(message.type)) return;
