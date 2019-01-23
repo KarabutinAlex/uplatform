@@ -1,4 +1,4 @@
-const up = require('./bootstrap');
+const up = require('../bootstrap');
 
 up.eventBus.consume(
     'hello', 
@@ -7,6 +7,8 @@ up.eventBus.consume(
         ack();
     },
 );
+
+// ---
 
 setTimeout(
     () => up.eventBus.publish('test', {

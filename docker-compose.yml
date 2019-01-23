@@ -28,3 +28,24 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_CREATE_TOPICS: "test:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+  zipkin:
+    container_name: uplatform.zipkin
+    image: openzipkin/zipkin:2.12
+    restart: always
+    networks:
+    - uplatform
+    ports:
+    - 127.0.0.1:9411:9411/tcp
+
+  postgres:
+    container_name: uplatform.postgres
+    image: postgres:9.6.11
+    restart: always
+    networks:
+    - uplatform
+    ports:
+    - 127.0.0.1:5432:5432/tcp
+    environment:
+      POSTGRES_USER: uplatform_test
+      POSTGRES_PASSWORD: mySecretP@s$w0rt

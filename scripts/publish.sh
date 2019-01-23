@@ -1,5 +1,5 @@
 #!/bin/bash
-packages=( core config logging http event-bus )
+packages=( core config logging http event-bus pg mongo )
 
 for package in "${packages[@]}"
 do

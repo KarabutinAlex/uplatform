@@ -1,18 +1,19 @@
 {
-  "name": "@uplatform/config",
+  "name": "@uplatform/pg",
   "version": "0.0.21",
-  "description": "uPlatfrom - Config Module",
+  "description": "uPlatform - PostgreSQL Module",
   "main": "src/index.js",
-  "directories": {
-    "example": "examples"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KarabutinAlex/uplatform.git"
   },
   "keywords": [
-    "uplatform",
-    "config"
+    "postgres",
+    "postgresql",
+    "uplatform"
   ],
   "authors": [
     {
@@ -26,8 +27,9 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/core": "0.0.20",
-    "config": "^3.0.1",
-    "js-yaml": "^3.12.1"
+    "@uplatform/config": "0.0.21",
+    "@uplatform/core": "0.0.21",
+    "@uplatform/logging": "0.0.21",
+    "pg": "^7.8.0"
   }
 }

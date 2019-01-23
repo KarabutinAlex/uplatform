@@ -1,7 +1,4 @@
-require('@uplatform/config');
-require('@uplatform/http');
-
-const { up } = require('@uplatform/core');
+const up = require('../bootstrap');
 
 const server = up.http.create();
 

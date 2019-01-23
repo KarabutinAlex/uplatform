@@ -1,27 +1,20 @@
 {
-  "name": "@uplatform/core",
+  "name": "@uplatform/tracing",
   "version": "0.0.21",
-  "description": "uPlatform - Core module",
+  "description": "uPlatform - Tracing Module",
   "main": "src/index.js",
-  "types": "src/index.d.ts",
-  "directories": {
-    "example": "examples"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KarabutinAlex/uplatform.git"
   },
   "keywords": [
-    "di",
-    "uplatform",
-    "modules"
+    "tracing",
+    "uplatform"
   ],
-  "authors": [
-    {
-      "name": "Karabutin Alex",
-      "email": "karabutin.alex@nexode.org"
-    }
-  ],
+  "author": "Karabutin Alex <karabutin.alex@nexode.org>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/KarabutinAlex/uplatform/issues"

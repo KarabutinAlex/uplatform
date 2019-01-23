@@ -27,6 +27,10 @@ class Application {
         this.modules.set(moduleId, resolver);
     }
 
+    hasModule(moduleId) {
+        return this.modules.has(moduleId);
+    }
+
     static create() {
         return new Proxy(
             new Application(),
