@@ -1,5 +1,9 @@
 "use strict";
 
+const ModulesSymbol = Symbol.for('uPlatform.modules');
+
+global[ModulesSymbol] = global[ModulesSymbol] || new Map();
+
 function cachedResolver(resolver) {
     let value = null;
     return () => value || (value = resolver());
@@ -16,7 +20,7 @@ class UnknownModule extends Error {
 
 class Application {
     constructor() {
-        this.modules = new Map();
+        this.modules = global[ModulesSymbol];
     }
 
     module(moduleId, resolver, { cached = true } = {}) {

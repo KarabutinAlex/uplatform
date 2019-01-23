@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/mongo",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "uPlatform - MongoDB Module",
   "main": "src/index.js",
   "scripts": {
@@ -27,9 +27,9 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/config": "0.0.21",
-    "@uplatform/core": "0.0.21",
-    "@uplatform/logging": "0.0.21",
+    "@uplatform/config": "0.0.22",
+    "@uplatform/core": "0.0.22",
+    "@uplatform/logging": "0.0.22",
     "mongodb": "^3.1.12"
   }
 }
