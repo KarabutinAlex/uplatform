@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/tracing",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "uPlatform - Tracing Module",
   "main": "src/index.js",
   "scripts": {

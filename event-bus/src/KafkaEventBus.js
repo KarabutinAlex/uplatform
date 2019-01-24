@@ -65,14 +65,24 @@ class KafkaEventBus {
             if (!handlers.has(message.type)) return;
 
             const handler = handlers.get(message.type);
-            
-            handler(message, error => {
-                if (error) {
-                    return this.logger.captureException(error);
-                }
 
-                consumer.commitMessage(data);
-            });
+            try {
+                const result = handler(message, error => {
+                    if (error) {
+                        return this.logger.captureException(error);
+                    }
+
+                    consumer.commitMessage(data);
+                });
+
+                if (result && result.catch) {
+                    result.catch(error => {
+                        this.logger.captureException(error);
+                    });
+                }
+            } catch (error) {
+                this.logger.captureException(error);
+            }
         });
 
         consumer.on('event.error', error => {

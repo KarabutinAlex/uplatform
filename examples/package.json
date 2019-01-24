@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/examples",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "uPlatform - Examples",
   "repository": {
     "type": "git",
@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/config": "0.0.22",
-    "@uplatform/core": "0.0.22",
-    "@uplatform/event-bus": "0.0.22",
-    "@uplatform/http": "0.0.22",
-    "@uplatform/logging": "0.0.22"
+    "@uplatform/config": "0.0.23",
+    "@uplatform/core": "0.0.23",
+    "@uplatform/event-bus": "0.0.23",
+    "@uplatform/http": "0.0.23",
+    "@uplatform/logging": "0.0.23"
   }
 }

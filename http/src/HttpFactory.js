@@ -28,9 +28,9 @@ class HttpFactory {
             app.use(bodyParser.json());
         }
 
-        return {
+        return Object.freeze({
             ...app,
-            listen(...args) {
+            listen: (...args) => {
                 const server = app.listen(...args);
                 const address = server.address();
 
@@ -40,7 +40,7 @@ class HttpFactory {
 
                 return app;
             },
-        };
+        });
     }
 }
 

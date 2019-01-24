@@ -19,6 +19,7 @@ up.module('mongo', () => {
     const client = new MongoClient(url, {
         poolSize,
         autoReconnect,
+        useNewUrlParser: true,
     });
 
     return client;
