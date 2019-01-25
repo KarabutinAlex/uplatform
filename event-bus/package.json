@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/event-bus",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "uPlatform - Event Bus Module",
   "main": "src/index.js",
   "repository": {
@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/config": "0.0.25",
-    "@uplatform/core": "0.0.25",
-    "@uplatform/logger": "0.0.25",
+    "@uplatform/config": "0.0.26",
+    "@uplatform/core": "0.0.26",
+    "@uplatform/logger": "0.0.26",
     "node-rdkafka": "^2.5.1",
     "uuid": "^3.3.2"
   }

@@ -7,5 +7,7 @@ up.module('logger', () => {
         ? up.config.get('logger.level') 
         : 'info';
 
-    return new Logger({ level });
+    const sentry = up.hasModule('sentry') ? up.sentry : null;
+
+    return new Logger({ level, sentry });
 });

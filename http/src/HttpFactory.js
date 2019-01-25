@@ -2,13 +2,37 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const expressCors = require('cors');
 const { expressMiddleware: zipkinMiddleware } = require('zipkin-instrumentation-express');
+const { errorHandler: validationErrorHandler } = require('@uplatform/validation');
+
+const defaultNotFoundHandler = (request, reply) => {
+    reply
+        .status(404)
+        .json({
+            errorCode: 'RESOURCE_NOT_FOUND'
+        });
+};
+
+const defaultErrorHandler = (error, request, reply, next) => {
+    reply
+        .status(500)
+        .json({
+            errorId: reply.sentry,
+            errorCode: 'INTERNAL_ERROR',
+        });
+};
 
 class HttpFactory {
 
-    constructor({ logger, tracer }) {
+    constructor({
+        logger,
+        tracer,
+        sentry,
+    }) {
         this.logger = logger;
         this.tracer = tracer;
+        this.sentry = sentry;
     }
 
     create({
@@ -17,6 +41,10 @@ class HttpFactory {
         enableCookieParser = true,
         enableTracing = true,
         enableValidation = true,
+        enableCORS = false,
+        notFoundHandler = defaultNotFoundHandler,
+        errorHandler = defaultErrorHandler,
+        cors,
     } = {}) {
         const app = express();
 
@@ -24,8 +52,20 @@ class HttpFactory {
             app.use(morgan('combined'));
         }
 
+        if (enableCORS) {
+            app.use(expressCors(cors));
+        }
+
         if (enableTracing && this.tracer) {
             app.use(zipkinMiddleware({ tracer: this.tracer }));
+            app.use((req, res, next) => {
+                res.set('Trace-ID', req._trace_id.traceId);
+                next();
+            });
+        }
+
+        if (this.sentry) {
+            app.use(this.sentry.requestHandler());
         }
 
         if (enableCookieParser) {
@@ -39,6 +79,18 @@ class HttpFactory {
         return Object.freeze({
             ...app,
             listen: (...args) => {
+                app.use(notFoundHandler);
+
+                if (enableValidation) {
+                    app.use(validationErrorHandler());
+                }
+
+                if (this.sentry) {
+                    app.use(this.sentry.errorHandler());
+                }
+
+                app.use(errorHandler);
+
                 const server = app.listen(...args);
                 const address = server.address();
 

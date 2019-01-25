@@ -2,7 +2,7 @@ const { createLogger, format, transports } = require('winston');
 
 class Logger {
     
-    constructor({ level }) {
+    constructor({ level, sentry }) {
         this.logger = createLogger({
             level,
             format: format.combine(
@@ -42,6 +42,10 @@ class Logger {
 
     captureException(error) {
         this.logger.error('[%s] %s', error.name, error.message);
+
+        if (this.sentry) {
+            this.sentry.captureException(error);
+        }
     }
 }
 

@@ -23,6 +23,7 @@
     "@uplatform/event-bus": "0.0.25",
     "@uplatform/http": "0.0.25",
     "@uplatform/logger": "0.0.25",
-    "@uplatform/tracer": "^0.0.25"
+    "@uplatform/tracer": "^0.0.25",
+    "@uplatform/pg": "^0.0.25"
   }
 }

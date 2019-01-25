@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/tracer",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "uPlatform - Tracing Module",
   "main": "src/index.js",
   "scripts": {
@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/config": "^0.0.25",
-    "@uplatform/core": "^0.0.25",
+    "@uplatform/config": "^0.0.26",
+    "@uplatform/core": "^0.0.26",
     "zipkin": "^0.16.0",
     "zipkin-context-cls": "^0.16.0",
     "zipkin-transport-http": "^0.16.0"

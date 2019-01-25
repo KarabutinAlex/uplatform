@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/validation",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "uPlatform - Validation Tools",
   "main": "src/index.js",
   "repository": {

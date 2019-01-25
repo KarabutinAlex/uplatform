@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/config",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "uPlatfrom - Config Module",
   "main": "src/index.js",
   "directories": {
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/core": "0.0.25",
+    "@uplatform/core": "0.0.26",
     "config": "^3.0.1",
     "js-yaml": "^3.12.1"
   }

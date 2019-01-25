@@ -3,6 +3,7 @@ packages=(
   core
   config
   validation
+  sentry
   logger
   tracer
   event-bus
