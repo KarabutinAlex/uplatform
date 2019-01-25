@@ -2,17 +2,21 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const { expressMiddleware: zipkinMiddleware } = require('zipkin-instrumentation-express');
 
 class HttpFactory {
 
-    constructor(logger) {
+    constructor({ logger, tracer }) {
         this.logger = logger;
+        this.tracer = tracer;
     }
 
     create({
         enableLogging = true,
         enableBodyParser = true,
-        enalbeCookieParser = true,
+        enableCookieParser = true,
+        enableTracing = true,
+        enableValidation = true,
     } = {}) {
         const app = express();
 
@@ -20,7 +24,11 @@ class HttpFactory {
             app.use(morgan('combined'));
         }
 
-        if (enalbeCookieParser) {
+        if (enableTracing && this.tracer) {
+            app.use(zipkinMiddleware({ tracer: this.tracer }));
+        }
+
+        if (enableCookieParser) {
             app.use(cookieParser());
         }
 

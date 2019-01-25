@@ -1,7 +1,7 @@
 const { up } = require('@uplatform/core');
 
 require('@uplatform/config');
-require('@uplatform/logging');
+require('@uplatform/logger');
 
 const { Pool } = require('pg');
 

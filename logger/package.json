@@ -1,18 +1,16 @@
 {
-  "name": "@uplatform/config",
+  "name": "@uplatform/logger",
   "version": "0.0.24",
-  "description": "uPlatfrom - Config Module",
+  "description": "uPlatform - Logging Module",
   "main": "src/index.js",
-  "directories": {
-    "example": "examples"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KarabutinAlex/uplatform.git"
   },
   "keywords": [
-    "uplatform",
-    "config"
+    "logging",
+    "error tracking",
+    "uplatform"
   ],
   "authors": [
     {
@@ -27,7 +25,7 @@
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
     "@uplatform/core": "0.0.24",
-    "config": "^3.0.1",
-    "js-yaml": "^3.12.1"
+    "@uplatform/config": "0.0.24",
+    "winston": "^3.1.0"
   }
 }

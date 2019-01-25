@@ -1,16 +1,22 @@
 {
-  "name": "@uplatform/logging",
-  "version": "0.0.23",
-  "description": "uPlatform - Logging Module",
+  "name": "@uplatform/migrations",
+  "version": "0.0.24",
+  "description": "uPlatform - Migrations Module",
   "main": "src/index.js",
+  "bin": {
+    "up-migrate": "up-migrate.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KarabutinAlex/uplatform.git"
   },
   "keywords": [
-    "logging",
-    "error tracking",
-    "uplatform"
+    "migrations",
+    "uplatform",
+    "sql"
   ],
   "authors": [
     {
@@ -24,8 +30,9 @@
   },
   "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
   "dependencies": {
-    "@uplatform/core": "0.0.23",
-    "@uplatform/config": "0.0.23",
-    "winston": "^3.1.0"
+    "@uplatform/config": "^0.0.24",
+    "@uplatform/core": "^0.0.24",
+    "@uplatform/logger": "^0.0.24",
+    "postgrator": "^3.7.0"
   }
 }

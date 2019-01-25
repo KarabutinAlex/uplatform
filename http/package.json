@@ -28,11 +28,12 @@
   "dependencies": {
     "@uplatform/config": "0.0.23",
     "@uplatform/core": "0.0.23",
-    "@uplatform/logging": "0.0.23",
+    "@uplatform/logger": "0.0.23",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "express-promise-router": "^3.0.3",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "zipkin-instrumentation-express": "^0.16.0"
   }
 }

@@ -1,5 +1,16 @@
 #!/bin/bash
-packages=( core config logging http event-bus pg mongo )
+packages=(
+  core
+  config
+  validation
+  logger
+  tracer
+  event-bus
+  pg
+  mongo
+  migrations
+  http
+)
 
 for package in "${packages[@]}"
 do

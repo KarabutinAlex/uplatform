@@ -1,7 +1,7 @@
 const { up } = require('@uplatform/core');
 
 require('@uplatform/config');
-require('@uplatform/logging');
+require('@uplatform/logger');
 
 const { KafkaEventBus } = require('./KafkaEventBus');
 
