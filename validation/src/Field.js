@@ -12,12 +12,21 @@ class Field extends BaseField {
             return { valid: true };
         });
     }
+
+    isEmail(message) {
+        return this.add(function (value) {
+            if (typeof value != 'string' || !(/^.+\@\..+$/i).test(value)) {
+                return { error: message || "%s is not an email address" };
+            }
+            return { valid: true };
+        });
+    }
 }
 
 /**
  * @param {String} property
  * @param {String} label
- * 
+ *
  * @returns {Field}
  */
 function field(property, label) {
