@@ -22,5 +22,10 @@ up.module('mongo', () => {
         useNewUrlParser: true,
     });
 
-    return client;
+    const connecting = client.connect().then(() => {});
+
+    return Object.freeze({
+        ...client,
+        ready: () => client.isConnected() ? Promise.resolve() : connecting,
+    });
 });

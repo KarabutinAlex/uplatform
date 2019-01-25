@@ -3,7 +3,8 @@ const { up } = require('@uplatform/core');
 require('@uplatform/config');
 require('@uplatform/logger');
 
-const { Pool } = require('pg');
+const zipkinClient = require('zipkin-instrumentation-postgres');
+const PostgreSQL = require('pg');
 
 const DEFAULT_CONNECTION_TIMEOUT = 0;
 const DEFAULT_IDLE_TIMEOUT = 10000;
@@ -29,6 +30,10 @@ function createQueryShortcut(client) {
 }
 
 up.module('pg', () => {
+    const { Pool } = up.hasModule('tracer')
+        ? zipkinClient(up.tracer, PostgreSQL)
+        : PostgreSQL;
+
     const databaseUrl = up.config.get('database.url');
     const connectionTimeout = up.config.has('database.connectionTimeout')
         ? up.config.has('database.connectionTimeout')
@@ -50,8 +55,18 @@ up.module('pg', () => {
     });
 
     const sql = createQueryShortcut(pool);
+    
+    let isReady = false;
+    const connecting = pool.connect().then(client => {
+        isReady = true;
+        client.release();
+    });
 
-    return Object.freeze({ ...pool, sql });
+    return Object.freeze({
+        ...pool,
+        sql,
+        ready: () => isReady ? Promise.resolve() : connecting,
+    });
 });
 
 module.exports = {

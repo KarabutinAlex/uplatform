@@ -7,3 +7,7 @@ eventBus:
 
 logger:
   level: info
+
+tracer:
+  url: http://localhost:9411
+  serviceName: example-http-server

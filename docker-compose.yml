@@ -49,3 +49,12 @@ services:
     environment:
       POSTGRES_USER: uplatform_test
       POSTGRES_PASSWORD: mySecretP@s$w0rt
+
+  zipkin:
+    container_name: uplatform.zipkin
+    image: openzipkin/zipkin:2.12
+    restart: always
+    networks:
+    - uplatform
+    ports:
+    - 127.0.0.1:9411:9411/tcp
