@@ -14,10 +14,18 @@ const defaultNotFoundHandler = (request, reply) => {
 };
 
 const defaultErrorHandler = (error, request, reply, next) => {
+
+    let errorId;
+
+    if (request.domain.__SENTRY__) {
+        const { hub } = request.domain.__SENTRY__;
+        errorId = hub.lastEventId();
+    }
+
     reply
         .status(500)
         .json({
-            errorId: reply.sentry,
+            errorId,
             errorCode: 'INTERNAL_ERROR',
         });
 };
