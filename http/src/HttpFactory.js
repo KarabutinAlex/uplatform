@@ -3,7 +3,6 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const expressCors = require('cors');
-const { expressMiddleware: zipkinMiddleware } = require('zipkin-instrumentation-express');
 const { errorHandler: validationErrorHandler } = require('@uplatform/validation');
 
 const defaultNotFoundHandler = (request, reply) => {
@@ -57,6 +56,10 @@ class HttpFactory {
         }
 
         if (enableTracing && this.tracer) {
+            const {
+                expressMiddleware: zipkinMiddleware
+            } = require('zipkin-instrumentation-express');
+
             app.use(zipkinMiddleware({ tracer: this.tracer }));
             app.use((req, res, next) => {
                 res.set('Trace-ID', req._trace_id.traceId);
@@ -87,6 +90,11 @@ class HttpFactory {
 
                 if (this.sentry) {
                     app.use(this.sentry.errorHandler());
+                } else {
+                    app.use((error, request, reply, next) => {
+                        this.logger.captureException(error);
+                        next(error);
+                    });
                 }
 
                 app.use(errorHandler);
