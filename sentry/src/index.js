@@ -10,11 +10,11 @@ up.module('sentry', () => {
     const dsn = up.config.get('sentry.dsn');
     const environment = up.config.get('sentry.environment');
 
-    const maxBreadcrumbs = up.config.get('sentry.maxBreadcrumbs')
+    const maxBreadcrumbs = up.config.has('sentry.maxBreadcrumbs')
         ? up.config.get('sentry.maxBreadcrumbs')
         : DEFAULT_MAX_BREADCRUMBS;
 
-    const serverName = up.config.get('sentry.serverName')
+    const serverName = up.config.has('sentry.serverName')
         ? up.config.get('sentry.serverName')
         : os.hostname();
 

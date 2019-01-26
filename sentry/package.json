@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/sentry",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "uPlatform - Sentry Integration",
   "main": "src/index.js",
   "scripts": {
