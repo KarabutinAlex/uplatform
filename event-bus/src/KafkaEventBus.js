@@ -117,10 +117,10 @@ class KafkaEventBus {
         this.handlers.set(event, handler);
     }
 
-    publish(topic, { type, payload, tags = {}, shardingValue = null }) {
+    publish(type, payload, { topic, tags = {}, shardKey = null }) {
         try {
             this.producer.produce(
-                topic,
+                topic || type,
                 -1,
                 Buffer.from(
                     JSON.stringify({
@@ -130,7 +130,7 @@ class KafkaEventBus {
                         tags,
                     })
                 ),
-                shardingValue,
+                shardKey,
                 Date.now(),
             );
         } catch (error) {
