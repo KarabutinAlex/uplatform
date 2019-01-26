@@ -53,8 +53,11 @@ class KafkaEventBus {
 
         consumer.on('ready', () => {
             this.logger.verbose('Consumer is ready.');
-            consumer.subscribe(topics);
-            consumer.consume();
+
+            if (topics.length) {
+                consumer.subscribe(topics);
+                consumer.consume();
+            }
         });
 
         consumer.on('data', data => {

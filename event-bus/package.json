@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/event-bus",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "uPlatform - Event Bus Module",
   "main": "src/index.js",
   "repository": {
