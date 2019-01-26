@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/migrations",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "uPlatform - Migrations Module",
   "main": "src/index.js",
   "bin": {

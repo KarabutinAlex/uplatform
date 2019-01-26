@@ -2,10 +2,14 @@ const Postgrator = require('postgrator');
 const up = require('./bootstrap');
 
 up.module('migrator', () => {
-  return new Postgrator({
-      driver: 'pg',
-      migrationDirectory: config.database.migrationDirectory,
-      connectionString: config.database.url,
-      ssl: false,
+    const migrationDirectory = up.config.has('database.migrationDirectory')
+        ? up.config.get('database.migrationDirectory')
+        : './migrations';
+
+    return new Postgrator({
+        driver: 'pg',
+        migrationDirectory,
+        connectionString: up.config.get('database.url'),
+        ssl: false,
     });
 });
