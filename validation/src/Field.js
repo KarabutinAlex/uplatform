@@ -15,7 +15,7 @@ class Field extends BaseField {
 
     isEmail(message) {
         return this.add(function (value) {
-            if (typeof value != 'string' || !(/^.+\@\..+$/i).test(value)) {
+            if (typeof value != 'string' || !(/^.+\@.+\..+$/i).test(value)) {
                 return { error: message || "%s is not an email address" };
             }
             return { valid: true };
