@@ -15,8 +15,17 @@ class Field extends BaseField {
 
     isEmail(message) {
         return this.add(function (value) {
-            if (typeof value != 'string' || !(/^.+\@.+\..+$/i).test(value)) {
+            if (typeof value !== 'string' || !(/^.+\@.+\..+$/i).test(value)) {
                 return { error: message || "%s is not an email address" };
+            }
+            return { valid: true };
+        });
+    }
+
+    oneOf(validValues, message) {
+        return this.add(function (value) {
+            if (typeof value !== 'string' || validValues.indexOf(value) < 0) {
+                return { error: message || "%s is incorrect value" };
             }
             return { valid: true };
         });
