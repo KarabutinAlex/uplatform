@@ -1,7 +1,7 @@
 const { createLogger, format, transports } = require('winston');
 
 class Logger {
-    
+
     constructor({ level, sentry }) {
         this.logger = createLogger({
             level,
@@ -14,6 +14,10 @@ class Logger {
                 new transports.Console(),
             ],
         });
+
+        if (sentry) {
+            this.sentry = sentry;
+        }
     }
 
     silly(...args) {
