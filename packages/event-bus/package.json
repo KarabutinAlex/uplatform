@@ -1,0 +1,35 @@
+{
+  "name": "@uplatform/event-bus",
+  "version": "0.1.1",
+  "description": "uPlatform - Event Bus Component",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarabutinAlex/uplatform.git"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha --recursive 'src/**/*.spec.js'"
+  },
+  "keywords": [
+    "uplatform",
+    "event bus"
+  ],
+  "authors": [
+    {
+      "name": "Karabutin Alex",
+      "email": "karabutin.alex@nexode.works"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "sinon": "^7.3.2"
+  },
+  "dependencies": {
+    "nats": "^1.2.10"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
