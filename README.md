@@ -1,33 +1,21 @@
+[![npm version](https://badge.fury.io/js/%40uplatform%2Fcore.svg)](https://www.npmjs.com/@uplatform/core)
+[![license](https://img.shields.io/npm/l/%40uplatform%2Fcore.svg)](LICENSE)
+
 <p align="center">
-  <img src="https://github.com/KarabutinAlex/uplatform/raw/master/assets/logo.png" alt="μPlatform" width="180" height="60" />
+  <img src="https://github.com/KarabutinAlex/uplatform/raw/master/assets/uPlatform.png" alt="μPlatform" width="180" height="60" />
 </p>
 
 ## Description
 
-**μPlatform** is a framework for building event-driven applications on Node.js.
+μPlatform is an event-driven application framework.
 
 Framework consists of next modules:
 
-* [Config](./packages/config)
-* [Service Discovery](./packages/service-discovery)
-* [Event Bus](./packages/event-bus)
-
-## Roadmap
-
-Features to be implemented:
-
-* Setup CI
-* Setup Code Coverage reporting
-* Create pages with documentation
-* Implement Circuit Breaker
-* Implemente Client-Side Load Balancer
-* Implement Event Log
-* Implement Health Checker
-* Implement Validation
-
-## License
-
-MIT
+* Core
+* Config
+* Logging
+* HTTP
+* Event Bus
 
 ## Authors
 

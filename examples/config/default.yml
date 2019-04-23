@@ -1,0 +1,16 @@
+eventBus:
+  id: examples.eventBus.simple-consumer
+  brokers: 
+  - localhost:9092
+  topics:
+  - test
+
+logger:
+  level: info
+
+tracer:
+  url: http://localhost:9411
+  serviceName: example-http-server
+
+database:
+  url: postgres://uplatform_test:mySecretPasSw0rt@127.0.0.1:5432/uplatform_test

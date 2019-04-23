@@ -1,0 +1,36 @@
+{
+  "name": "@uplatform/pg",
+  "version": "0.0.27",
+  "description": "uPlatform - PostgreSQL Module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarabutinAlex/uplatform.git"
+  },
+  "keywords": [
+    "postgres",
+    "postgresql",
+    "uplatform"
+  ],
+  "authors": [
+    {
+      "name": "Karabutin Alex",
+      "email": "karabutin.alex@nexode.org"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarabutinAlex/uplatform/issues"
+  },
+  "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
+  "dependencies": {
+    "@uplatform/config": "0.0.26",
+    "@uplatform/core": "0.0.26",
+    "@uplatform/logger": "0.0.26",
+    "pg": "^7.8.0",
+    "zipkin-instrumentation-postgres": "^0.16.0"
+  }
+}

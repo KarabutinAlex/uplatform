@@ -1,0 +1,5 @@
+eventBus:
+  brokers: KAFKA_BROKERS
+
+logger:
+  level: LOGGER_LEVEL

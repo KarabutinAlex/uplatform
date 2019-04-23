@@ -1,0 +1,30 @@
+{
+  "name": "@uplatform/core",
+  "version": "0.0.26",
+  "description": "uPlatform - Core module",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarabutinAlex/uplatform.git"
+  },
+  "keywords": [
+    "di",
+    "uplatform",
+    "modules"
+  ],
+  "authors": [
+    {
+      "name": "Karabutin Alex",
+      "email": "karabutin.alex@nexode.org"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarabutinAlex/uplatform/issues"
+  },
+  "homepage": "https://github.com/KarabutinAlex/uplatform#readme"
+}

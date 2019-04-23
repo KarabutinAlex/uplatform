@@ -1,0 +1,29 @@
+{
+  "name": "@uplatform/examples",
+  "version": "0.0.25",
+  "description": "uPlatform - Examples",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarabutinAlex/uplatform.git"
+  },
+  "authors": [
+    {
+      "name": "Karabutin Alex",
+      "email": "karabutin.alex@nexode.org"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarabutinAlex/uplatform/issues"
+  },
+  "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
+  "dependencies": {
+    "@uplatform/config": "0.0.25",
+    "@uplatform/core": "0.0.25",
+    "@uplatform/event-bus": "0.0.25",
+    "@uplatform/http": "0.0.25",
+    "@uplatform/logger": "0.0.25",
+    "@uplatform/tracer": "^0.0.25",
+    "@uplatform/pg": "^0.0.25"
+  }
+}

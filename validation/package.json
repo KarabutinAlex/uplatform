@@ -1,0 +1,28 @@
+{
+  "name": "@uplatform/validation",
+  "version": "0.0.28",
+  "description": "uPlatform - Validation Tools",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarabutinAlex/uplatform.git"
+  },
+  "keywords": [
+    "validation",
+    "uplatform",
+    "express"
+  ],
+  "author": {
+    "name": "Karabutin Alex",
+    "email": "karabutin.alex@nexode.org"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarabutinAlex/uplatform/issues"
+  },
+  "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
+  "dependencies": {
+    "express-form": "^0.12.6"
+  },
+  "gitHead": "faf716438fa331f530980102af4861be164593df"
+}

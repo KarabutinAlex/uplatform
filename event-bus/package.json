@@ -1,0 +1,33 @@
+{
+  "name": "@uplatform/event-bus",
+  "version": "0.0.28",
+  "description": "uPlatform - Event Bus Module",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarabutinAlex/uplatform.git"
+  },
+  "keywords": [
+    "event",
+    "bus",
+    "uplatform"
+  ],
+  "authors": [
+    {
+      "name": "Karabutin Alex",
+      "email": "karabutin.alex@nexode.org"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarabutinAlex/uplatform/issues"
+  },
+  "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
+  "dependencies": {
+    "@uplatform/config": "0.0.26",
+    "@uplatform/core": "0.0.26",
+    "@uplatform/logger": "0.0.26",
+    "node-rdkafka": "^2.5.1",
+    "uuid": "^3.3.2"
+  }
+}

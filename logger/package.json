@@ -1,0 +1,31 @@
+{
+  "name": "@uplatform/logger",
+  "version": "0.0.26",
+  "description": "uPlatform - Logging Module",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarabutinAlex/uplatform.git"
+  },
+  "keywords": [
+    "logging",
+    "error tracking",
+    "uplatform"
+  ],
+  "authors": [
+    {
+      "name": "Karabutin Alex",
+      "email": "karabutin.alex@nexode.org"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarabutinAlex/uplatform/issues"
+  },
+  "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
+  "dependencies": {
+    "@uplatform/core": "0.0.26",
+    "@uplatform/config": "0.0.26",
+    "winston": "^3.1.0"
+  }
+}

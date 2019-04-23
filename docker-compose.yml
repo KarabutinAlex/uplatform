@@ -1,0 +1,51 @@
+version: "2.4"
+
+networks:
+  uplatform:
+    driver: bridge
+
+services:
+  zookeeper:
+    container_name: uplatform.zookeeper
+    image: wurstmeister/zookeeper:latest
+    restart: always
+    networks:
+    - uplatform
+
+  kafka:
+    container_name: uplatform.kafka
+    image: wurstmeister/kafka:2.12-2.1.0
+    restart: always
+    depends_on:
+    - zookeeper
+    networks:
+    - uplatform
+    ports:
+    - 127.0.0.1:9092:9092/tcp
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+  postgres:
+    container_name: uplatform.postgres
+    image: postgres:9.6.11
+    restart: always
+    networks:
+    - uplatform
+    ports:
+    - 127.0.0.1:5432:5432/tcp
+    environment:
+      POSTGRES_USER: uplatform_test
+      POSTGRES_PASSWORD: mySecretPasSw0rt
+
+  zipkin:
+    container_name: uplatform.zipkin
+    image: openzipkin/zipkin:2.12
+    restart: always
+    networks:
+    - uplatform
+    ports:
+    - 127.0.0.1:9411:9411/tcp

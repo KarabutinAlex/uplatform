@@ -1,0 +1,38 @@
+{
+  "name": "@uplatform/migrations",
+  "version": "0.0.28",
+  "description": "uPlatform - Migrations Module",
+  "main": "src/index.js",
+  "bin": {
+    "up-migrate": "bin/up-migrate.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarabutinAlex/uplatform.git"
+  },
+  "keywords": [
+    "migrations",
+    "uplatform",
+    "sql"
+  ],
+  "authors": [
+    {
+      "name": "Karabutin Alex",
+      "email": "karabutin.alex@nexode.org"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarabutinAlex/uplatform/issues"
+  },
+  "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
+  "dependencies": {
+    "@uplatform/config": "^0.0.26",
+    "@uplatform/core": "^0.0.26",
+    "@uplatform/logger": "^0.0.26",
+    "postgrator": "^3.7.0"
+  }
+}

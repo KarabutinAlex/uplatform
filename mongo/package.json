@@ -1,0 +1,35 @@
+{
+  "name": "@uplatform/mongo",
+  "version": "0.0.26",
+  "description": "uPlatform - MongoDB Module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/KarabutinAlex/uplatform.git"
+  },
+  "keywords": [
+    "mongo",
+    "mongodb",
+    "uplatform"
+  ],
+  "authors": [
+    {
+      "name": "Karabutin Alex",
+      "email": "karabutin.alex@nexode.org"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KarabutinAlex/uplatform/issues"
+  },
+  "homepage": "https://github.com/KarabutinAlex/uplatform#readme",
+  "dependencies": {
+    "@uplatform/config": "0.0.26",
+    "@uplatform/core": "0.0.26",
+    "@uplatform/logger": "0.0.26",
+    "mongodb": "^3.1.12"
+  }
+}
