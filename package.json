@@ -5,6 +5,7 @@
     "lerna": "^3.13.2"
   },
   "scripts": {
-    "publish": "lerna publish from-package --yes"
+    "publish": "lerna publish from-package --yes",
+    "bump-patch": "lerna version patch --git-tag-version=false --yes"
   }
 }
