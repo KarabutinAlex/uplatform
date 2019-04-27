@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/event-bus",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "uPlatform - Event Bus Component",
   "repository": {
     "type": "git",

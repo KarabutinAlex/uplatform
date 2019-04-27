@@ -1,6 +1,6 @@
 {
   "name": "@uplatform/service-discovery",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "uPlatform - Service Discovery Component",
   "repository": {
     "type": "git",
