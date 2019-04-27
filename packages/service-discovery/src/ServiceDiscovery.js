@@ -10,9 +10,12 @@ class ServiceDiscovery {
         backend = new RedisBackend({
             url: process.env['REDIS_URL'] || 'redis://127.0.0.1:6379',
         }),
+        heartbeatInterval = 1000,
     } = {}) {
         this.name = name;
         this.backend = backend;
+        this.heartbeatInterval = heartbeatInterval;
+        this.heartbeats = new Map();
     }
 
     async publish({
@@ -31,10 +34,28 @@ class ServiceDiscovery {
 
         await this.backend.create(instance.id, instance);
 
+        const heartbeatId = setInterval(
+            async () => {
+                try {
+                    await this.backend.create(instance.id, instance);
+                } catch (error) {
+                    console.error(`Cant publish service "${instance.id}:`, error.message);
+                    clearInterval(heartbeatId);
+                    this.heartbeats.delete(instance.id);
+                }
+            },
+            this.heartbeatInterval,
+        );
+
+        this.heartbeats.set(instance.id, heartbeatId);
+
         return instance;
     }
 
     async unpublish({ id }) {
+        clearInterval(this.heartbeats.get(id));
+        this.heartbeats.delete(id);
+
         await this.backend.delete(id);
     }
 
@@ -61,7 +82,13 @@ class ServiceDiscovery {
     }
 
     async close() {
-        this.backend.close();
+        for (const heartbeatId of this.heartbeats.values()) {
+            clearInterval(heartbeatId);
+        }
+
+        this.heartbeats.clear();
+
+        await this.backend.close();
     }
 }
 

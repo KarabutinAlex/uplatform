@@ -6,13 +6,15 @@ class RedisBackend {
     constructor(
         url,
         options = {},
-        key = 'service-discovery',
+        prefix = 'service-discovery',
+        ttl = 60,
     ) {
-        this.key = key;
+        this.prefix = prefix;
         this.url = url;
         this.options = options;
         this.redisClient = null;
         this.isConnected = false;
+        this.ttl = ttl;
     }
 
     get client() {
@@ -40,13 +42,30 @@ class RedisBackend {
         });
     }
 
+    async cleanup() {
+        const client = await this.client;
+
+        return await new Promise((resolve, reject) => client.keys(
+            `${this.prefix}:*`,
+            (error, keys) => {
+                if (error) return reject(error);
+                if (!keys.length) return resolve();
+
+                return client.del(...keys, error => {
+                    if (error) return reject(error);
+                    resolve();
+                });
+            }
+        ));
+    }
+
     async create(id, instance) {
         const client = await this.client;
 
-        return new Promise((resolve, reject) => client.hset(
-            this.key,
-            id,
+        return new Promise((resolve, reject) => client.set(
+            `${this.prefix}:${id}`,
             JSON.stringify(instance),
+            'EX', this.ttl,
             error => {
                 if (error) {
                     return reject(error);
@@ -60,13 +79,10 @@ class RedisBackend {
     async delete(id) {
         const client = await this.client;
 
-        return new Promise((resolve, reject) => client.hdel(
-            this.key,
-            id,
+        return new Promise((resolve, reject) => client.del(
+            `${this.prefix}:${id}`,
             error => {
-                if (error) {
-                    return reject(error);
-                }
+                if (error) return reject(error);
 
                 resolve();
             },
@@ -76,19 +92,17 @@ class RedisBackend {
     async list() {
         const client = await this.client;
 
-        return new Promise((resolve, reject) => client.hgetall(
-            this.key,
-            (error, result) => {
-                if (error) {
-                    return reject(error);
-                }
+        return await new Promise((resolve, reject) => client.keys(
+            `${this.prefix}:*`,
+            (error, keys) => {
+                if (error) return reject(error);
+                if (!keys.length) return resolve([]);
 
-                resolve(
-                    _.map(
-                        _.values(result),
-                        JSON.parse,
-                    ),
-                );
+                return client.mget(keys, (error, items) => {
+                    if (error) return reject(error);
+
+                    resolve(items.map(JSON.parse));
+                });
             }
         ));
     }

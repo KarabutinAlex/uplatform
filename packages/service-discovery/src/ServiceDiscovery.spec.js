@@ -7,47 +7,22 @@ const redisUrl = process.env['REDIS_URL'] || 'redis://127.0.0.1:6379';
 describe('ServiceDiscovery', () => {
     let providerDiscovery = null;
     let consumerDiscovery = null;
-    let redisClient = null;
-
-    before(async () => {
-        redisClient = await new Promise((resolve, reject) => {
-            const client = redis.createClient(redisUrl);
-            client.on('ready', () => resolve(client));
-            client.on('error', reject);
-        });
-    });
-
-    after(async () => {
-        if (redisClient !== null) {
-            await new Promise((resolve, reject) => {
-                redisClient.quit(error => {
-                    if (error) reject(error);
-                    resolve();
-                });
-            });
-        }
-    });
 
     beforeEach(async () => {
         providerDiscovery = new ServiceDiscovery({ name: 'provider-1' });
         consumerDiscovery = new ServiceDiscovery({ name: 'consumer-1' });
 
-        await new Promise((resolve, reject) => {
-            redisClient.del('service-discovery', error => {
-                if (error) return reject(error);
-                resolve();
-            });
-        });
+        await providerDiscovery.backend.cleanup();
     });
 
-    afterEach(() => {
+    afterEach(async () => {
         if (consumerDiscovery != null) {
-            consumerDiscovery.close();
+            await consumerDiscovery.close();
             consumerDiscovery = null;
         }
 
         if (providerDiscovery != null) {
-            providerDiscovery.close();
+            await providerDiscovery.close();
             providerDiscovery = null;
         }
     });

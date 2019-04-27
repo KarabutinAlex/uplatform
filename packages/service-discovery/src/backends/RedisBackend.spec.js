@@ -5,15 +5,17 @@ describe('RedisBackend', () => {
 
     let backend = null;
 
-    beforeEach(() => {
+    beforeEach(async () => {
         backend = new RedisBackend({
             url: process.env['REDIS_URL'] || 'redis://127.0.0.1:6379',
         });
+
+        await backend.cleanup();
     });
 
-    afterEach(() => {
+    afterEach(async () => {
         if (backend !== null) {
-            backend.close();
+            await backend.close();
         }
     });
 

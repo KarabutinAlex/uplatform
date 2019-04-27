@@ -42,7 +42,7 @@ class EventBus {
 
     async subscribe(address, callback) {
         const nats = await this.nats;
-        nats.subscribe(
+        return nats.subscribe(
             address,
             (message, reply, subject) => {
                 callback({
@@ -52,6 +52,11 @@ class EventBus {
                 });
             },
         );
+    }
+
+    async unsubscribe(subscriptionId) {
+        const nats = await this.nats;
+        return nats.unsubscribe(subscriptionId);
     }
 
     async close() {
