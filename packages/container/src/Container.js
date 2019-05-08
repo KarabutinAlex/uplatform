@@ -1,6 +1,12 @@
 const { UnknownMemberError } = require('./UnknownMemberError');
 const { UnsupportedServiceProviderError } = require('./UnsupportedServiceProviderError');
 
+const isSymbol = (input) => typeof input === 'symbol';
+const isInspectSymbol = (input) => {
+    return isSymbol(input)
+        && String(input) === 'Symbol(util.inspect.custom)';
+}
+
 class Container {
 
     constructor() {
@@ -20,19 +26,17 @@ class Container {
             },
 
             get: (_, property) => {
-                if (typeof property === 'symbol' && String(property) === 'Symbol(util.inspect.custom)') {
-                    return () => ({
+                if (isInspectSymbol(property)) {
+                    return {
                         definions: this.definions,
                         factories: this.factories,
                         instances: this.instances,
-                    });
+                    };
                 }
 
-                if (target[property] || property instanceof Symbol) {
-                    return target[property];
-                }
-
-                return target.get(property);
+                return target[property] || isSymbol(property)
+                    ? target[property]
+                    : target.get(property);
             },
         });
     }

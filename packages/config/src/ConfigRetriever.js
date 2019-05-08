@@ -23,38 +23,24 @@ class ConfigRetriever {
     }
 
     connectStores(stores) {
+        const storeFactories = {
+            'env': options => new EnvironmentConfigStore(options),
+            'file': options => new FileConfigStore(options),
+            'http': options => new HttpConfigStore(options),
+        };
+
         for (const { type, optional, ...options } of stores) {
-            switch (type) {
-                case 'env':
-                    this.sources.push({
-                        optional,
-                        store: new EnvironmentConfigStore(options),
-                    });
-                    break;
-
-                case 'file':
-                    this.sources.push({
-                        optional,
-                        store: new FileConfigStore({
-                            configProcessor: this.configProcessor,
-                            ...options,
-                        }),
-                    });
-                    break;
-
-                case 'http':
-                    this.sources.push({
-                        optional,
-                        store: new HttpConfigStore({
-                            configProcessor: this.configProcessor,
-                            ...options,
-                        }),
-                    });
-                    break;
-
-                default:
-                    throw new UnknownConfigStore(type);
+            if (!storeFactories[type]) {
+                throw new UnknownConfigStore(type);
             }
+
+            this.sources.push({
+                optional,
+                store: storeFactories[type]({
+                    configProcessor: this.configProcessor,
+                    ...options,
+                }),
+            });
         }
     }
 
