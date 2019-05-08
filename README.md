@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+
 <p align="center">
   <img src="https://github.com/KarabutinAlex/uplatform/raw/master/assets/logo.png" alt="μPlatform" width="180" height="60" />
 </p>
@@ -9,6 +11,7 @@
 Framework consists of next modules:
 
 * [Config](./packages/config)
+* [Container](./packages/container)
 * [Service Discovery](./packages/service-discovery)
 * [Event Bus](./packages/event-bus)
 
@@ -20,7 +23,7 @@ Features to be implemented:
 * Setup Code Coverage reporting
 * Create pages with documentation
 * Implement Circuit Breaker
-* Implemente Client-Side Load Balancer
+* Implement Client-Side Load Balancer
 * Implement Event Log
 * Implement Health Checker
 * Implement Validation
