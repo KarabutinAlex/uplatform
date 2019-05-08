@@ -19,7 +19,10 @@ class ConfigRetriever {
     } = {}) {
         this.sources = [];
         this.configProcessor = configProcessor;
+        this.connectStores(stores);
+    }
 
+    connectStores(stores) {
         for (const { type, optional, ...options } of stores) {
             switch (type) {
                 case 'env':

@@ -7,9 +7,15 @@ class Container {
         this.definions = new Map();
         this.instances = new Map();
         this.factories = new Map();
-        this.proxy = new Proxy(this, {
+        this.proxy = this.createProxy(this);
+
+        return this.proxy;
+    }
+
+    createProxy(target) {
+        return new Proxy(target, {
             set: (_, property, value) => {
-                this.set(property, value);
+                target.set(property, value);
                 return true;
             },
 
@@ -22,15 +28,13 @@ class Container {
                     });
                 }
 
-                if (this[property] || property instanceof Symbol) {
-                    return this[property];
+                if (target[property] || property instanceof Symbol) {
+                    return target[property];
                 }
 
-                return this.get(property);
+                return target.get(property);
             },
         });
-
-        return this.proxy;
     }
 
     set(member, definion) {
