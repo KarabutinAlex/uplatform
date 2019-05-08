@@ -1,4 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+[![Maintainability](https://api.codeclimate.com/v1/badges/28ee7881b922acb83127/maintainability)](https://codeclimate.com/github/KarabutinAlex/uplatform/maintainability)
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/KarabutinAlex/uplatform.svg)
 
 <p align="center">
   <img src="https://github.com/KarabutinAlex/uplatform/raw/master/assets/logo.png" alt="μPlatform" width="180" height="60" />
