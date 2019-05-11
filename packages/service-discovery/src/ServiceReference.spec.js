@@ -8,8 +8,20 @@ describe('ServiceReference', () => {
             type: '*',
             metadata: {},
             instances: [
-                { id: 1, name: 'app-1', type: 'http', location: {}, metadata: {} },
-                { id: 2, name: 'app-1', type: 'http', location: {}, metadata: {} },
+                {
+                    id: 1,
+                    name: 'app-1',
+                    type: 'http',
+                    location: {},
+                    metadata: {},
+                },
+                {
+                    id: 2,
+                    name: 'app-1',
+                    type: 'http',
+                    location: {},
+                    metadata: {},
+                },
             ],
         });
 
@@ -31,7 +43,7 @@ describe('ServiceReference', () => {
                         port: 12345,
                         path: '/api/v2',
                     },
-                    metadata: {}
+                    metadata: {},
                 },
             ],
         });
@@ -52,15 +64,15 @@ describe('ServiceReference', () => {
                     name: 'app-1',
                     type: 'grpc',
                     location: {},
-                    metadata: {}
+                    metadata: {},
                 },
             ],
         });
 
         assert.throws(
             () => serviceRef.asHttpClient(),
-            `There aren't any registered HTTP instances of "app-1".`,
-        )
+            'There aren\'t any registered HTTP instances of "app-1".',
+        );
     });
 
     it('requires axios to be installed to use an HTTP client', () => {
@@ -69,12 +81,12 @@ describe('ServiceReference', () => {
             type: '*',
             metadata: {},
             instances: [],
-            axiosModuleId: 'axios-on-steroids'
+            axiosModuleId: 'axios-on-steroids',
         });
 
         assert.throws(
             () => serviceRef.asHttpClient(),
-            `In order to use .asHttpClient() do "npm install --save axios-on-steroids".`,
+            'In order to use .asHttpClient() do "npm install --save axios-on-steroids".',
         );
     });
 });

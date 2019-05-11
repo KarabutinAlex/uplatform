@@ -1,5 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+[![CircleCI](https://circleci.com/gh/KarabutinAlex/uplatform/tree/master.svg?style=svg)](https://circleci.com/gh/KarabutinAlex/uplatform/tree/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/28ee7881b922acb83127/maintainability)](https://codeclimate.com/github/KarabutinAlex/uplatform/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/28ee7881b922acb83127/test_coverage)](https://codeclimate.com/github/KarabutinAlex/uplatform/test_coverage)
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/KarabutinAlex/uplatform.svg)
 
 <p align="center">

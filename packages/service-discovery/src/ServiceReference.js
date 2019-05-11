@@ -1,7 +1,6 @@
 const _ = require('lodash');
 
 class ServiceReference {
-
     constructor({
         name,
         type,
@@ -26,7 +25,7 @@ class ServiceReference {
         if (!this.axiosModule) {
             this.axiosModule = require(this.axiosModuleId);
         }
-    
+
         return this.axiosModule;
     }
 

@@ -1,0 +1,59 @@
+version: 2
+jobs:
+  build:
+    docker:
+    - image: circleci/node:10.15.3
+    steps:
+    - checkout
+    - run:
+        name: Update NPM
+        command: 'sudo npm install -g npm@latest'
+    - restore_cache:
+        key: deps-cache-{{ checksum "package-lock.json" }}
+    - run:
+        name: Install NPM dependencies
+        command: npm install
+    - run:
+        name: Bootstrap packages
+        command: npm run bootstrap
+    - save_cache:
+        key: deps-cache-{{ checksum "package-lock.json" }}
+        paths:
+        - node_modules
+        - packages/config/node_modules
+        - packages/container/node_modules
+        - packages/event-bus/node_modules
+        - packages/service-discovery/node_modules
+
+  test:
+    docker:
+    - image: circleci/node:10.15.3
+    - image: circleci/redis:4.0.14
+    - image: nats:1.4.1
+    steps:
+    - checkout
+    - restore_cache:
+        key: deps-cache-{{ checksum "package-lock.json" }}
+    - run:
+        name: Setup Code Climate test-reporter
+        command: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+    - run:
+        name: Run tests
+        command: |
+          ./cc-test-reporter before-build
+          npm run test:coverage
+          ./cc-test-reporter after-build \
+            --id 4fe5ebf51bd5f3fb7f3eab35802f78fd0ee7917a313d7af52e6e9e3e24b8d6ea \
+            --coverage-input-type lcov \
+            --exit-code $?
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+    - build
+    - test:
+        requires:
+        - build
