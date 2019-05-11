@@ -2,9 +2,17 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.13.2"
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "lerna": "^3.13.2",
+    "nyc": "^14.1.1"
   },
   "scripts": {
-    "publish-patch": "lerna publish patch --yes"
+    "bootstrap": "lerna bootstrap",
+    "publish-patch": "lerna publish patch --yes",
+    "lint": "eslint packages",
+    "test": "lerna run test",
+    "test:coverage": "nyc --reporter lcov --reporter text --exclude packages/**/*.spec.js npm test"
   }
 }

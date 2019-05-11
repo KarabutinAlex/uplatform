@@ -4,11 +4,10 @@ const { RedisBackend } = require('./backends/RedisBackend');
 const { ServiceReference } = require('./ServiceReference');
 
 class ServiceDiscovery {
-
     constructor({
         name,
         backend = new RedisBackend({
-            url: process.env['REDIS_URL'] || 'redis://127.0.0.1:6379',
+            url: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
         }),
         heartbeatInterval = 1000,
     } = {}) {
@@ -66,15 +65,15 @@ class ServiceDiscovery {
             metadata,
             instances: _.filter(
                 await this.backend.list(),
-                instance => {
+                (instance) => {
                     if (name !== instance.name) {
                         return false;
                     }
-    
+
                     if (type !== '*' && type !== instance.type) {
                         return false;
                     }
-    
+
                     return _.isMatch(instance.metadata, metadata);
                 },
             ),

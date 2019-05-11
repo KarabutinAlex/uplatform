@@ -1,8 +1,5 @@
 const { assert } = require('chai');
-const redis = require('redis');
 const { ServiceDiscovery } = require('./ServiceDiscovery');
-
-const redisUrl = process.env['REDIS_URL'] || 'redis://127.0.0.1:6379';
 
 describe('ServiceDiscovery', () => {
     let providerDiscovery = null;

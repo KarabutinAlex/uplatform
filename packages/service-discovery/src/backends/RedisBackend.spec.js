@@ -1,4 +1,4 @@
-const { assert } = require('chai');
+const { expect, assert } = require('chai');
 const { RedisBackend } = require('./RedisBackend');
 
 describe('RedisBackend', () => {
@@ -25,7 +25,7 @@ describe('RedisBackend', () => {
 
         const records = await backend.list();
 
-        assert.deepEqual(records, [
+        expect(records).to.deep.include.members([
             { id: 1, value: 100 },
             { id: 2, value: 200 },
         ]);
