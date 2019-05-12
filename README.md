@@ -21,12 +21,9 @@ Framework consists of next modules:
 
 Features to be implemented:
 
-* Setup CI
-* Setup Code Coverage reporting
 * Create pages with documentation
 * Implement Circuit Breaker
 * Implement Client-Side Load Balancer
-* Implement Event Log
 * Implement Health Checker
 * Implement Validation
 
