@@ -3,7 +3,7 @@ const { UnknownMemberError } = require('./UnknownMemberError');
 const { UnsupportedServiceProviderError } = require('./UnsupportedServiceProviderError');
 
 module.exports = {
-    Container,
-    UnknownMemberError,
-    UnsupportedServiceProviderError,
+  Container,
+  UnknownMemberError,
+  UnsupportedServiceProviderError,
 };

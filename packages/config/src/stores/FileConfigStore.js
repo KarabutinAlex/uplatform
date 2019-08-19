@@ -1,35 +1,34 @@
 const fs = require('fs');
 const { promisify } = require('util');
+
 const readFile = promisify(fs.readFile);
 
 class FileConfigStore {
-    
-    constructor({
-        configProcessor,
-        path,
-        format,
-    } = {}) {
-        this.path = path;
-        this.format = format;
-        this.configProcessor = configProcessor;
-    }
+  constructor({
+    configProcessor,
+    path,
+    format,
+  } = {}) {
+    this.path = path;
+    this.format = format;
+    this.configProcessor = configProcessor;
+  }
 
-    async getConfig() {
-        return this.configProcessor.process(
-            this.format,
-            await this.loadFile(this.path),
-        );
-    }
+  async getConfig() {
+    return this.configProcessor.process(
+      this.format,
+      await this.loadFile(),
+    );
+  }
 
-    async loadFile(path) {
-        try {
-            return await readFile(path);
-        } catch (e) {
-            throw new Error(`Can't load config from file: ${e.message}`);
-        }
+  async loadFile() {
+    try {
+      const content = await readFile(this.path);
+      return content;
+    } catch (error) {
+      throw new Error(`Can't load config from file: ${error.message}`);
     }
+  }
 }
 
-module.exports = {
-    FileConfigStore,
-};
+module.exports = { FileConfigStore };

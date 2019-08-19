@@ -1,0 +1,14 @@
+version: "2.4"
+
+services:
+  redis:
+    container_name: uplatform.redis
+    image: redis:4.0.14-alpine
+    ports:
+    - 6379:6379/tcp
+
+  nats:
+    container_name: uplatform.nats
+    image: nats:2.0.0-linux
+    ports:
+    - 4222:4222/tcp

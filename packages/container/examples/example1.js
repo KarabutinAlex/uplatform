@@ -1,33 +1,40 @@
 const { Container } = require('../src');
 
 class LetterRepository {
-    list() {
-        return ['A', 'B', 'C'];
-    }
+  constructor({ letters }) {
+    this.letters = letters;
+  }
+
+  list() {
+    return this.letters;
+  }
 }
 
 class LetterController {
+  constructor({ letterRepository }) {
+    this.letterRepository = letterRepository;
+  }
 
-    constructor({ letterRepository }) {
-        this.letterRepository = letterRepository;
-    }
-
-    showList() {
-        return this.letterRepository.list();
-    }
+  showList() {
+    return this.letterRepository.list();
+  }
 }
 
-class LetterServiceProvider {
-    register(container) {
-        container.set('letterRepository', () => new LetterRepository());
-        container.set('letterController', () => new LetterController({
-            letterRepository: container.get('letterRepository'),
-        }));
-    }
-}
+const letterServiceProvider = (container) => {
+  container.bind('letterRepository', () => new LetterRepository({
+    letters: ['A', 'B', 'C'],
+  }));
+
+  container.bind('letterController', () => new LetterController({
+    letterRepository: container.get('letterRepository'),
+  }));
+};
 
 const container = new Container();
-container.register(new LetterServiceProvider());
+
+container.use(letterServiceProvider);
 
 const letterController = container.get('letterController');
-console.log(letterController.showList()); // ['A', 'B', 'C']
+
+// Next code prints: ['A', 'B', 'C']
+console.log(letterController.showList());

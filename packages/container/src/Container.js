@@ -1,126 +1,143 @@
 const { UnknownMemberError } = require('./UnknownMemberError');
 const { UnsupportedServiceProviderError } = require('./UnsupportedServiceProviderError');
 
-const isSymbol = (input) => typeof input === 'symbol';
-const isInspectSymbol = (input) => {
-    return isSymbol(input)
+/**
+ * Checks if the value has a symbol type.
+ *
+ * @param {*} value
+ * @returns {boolean}
+ */
+const isSymbol = value => typeof value === 'symbol';
+
+const isInspectSymbol = input => isSymbol(input)
         && String(input) === 'Symbol(util.inspect.custom)';
-}
 
 class Container {
+  constructor() {
+    this.definions = new Map();
+    this.instances = new Map();
+    this.factories = new Map();
+    this.proxy = this.createProxy(this);
 
-    constructor() {
-        this.definions = new Map();
-        this.instances = new Map();
-        this.factories = new Map();
-        this.proxy = this.createProxy(this);
+    return Object.freeze(this.proxy);
+  }
 
-        return this.proxy;
-    }
-
-    createProxy(target) {
-        return new Proxy(target, {
-            set: (_, property, value) => {
-                target.set(property, value);
-                return true;
-            },
-
-            get: (_, property) => {
-                if (isInspectSymbol(property)) {
-                    return {
-                        definions: this.definions,
-                        factories: this.factories,
-                        instances: this.instances,
-                    };
-                }
-
-                return target[property] || isSymbol(property)
-                    ? target[property]
-                    : target.get(property);
-            },
-        });
-    }
-
-    set(member, definion) {
-        this.definions.set(member, definion);
-    }
-
-    factory(member, definion) {
-        this.factories.set(member, definion);
-    }
-
-    extend(member, extender) {
-        if (this.definions.has(member)) {
-            const definion = this.definions.get(member);
-
-            this.definions.set(
-                member,
-                () => extender(
-                    definion(this.proxy),
-                    this.proxy,
-                ),
-            );
-
-            return;
+  /**
+   * @private
+   * @param {Container} target
+   */
+  createProxy(target) {
+    return new Proxy(target, {
+      get: (_, property) => {
+        if (isInspectSymbol(property)) {
+          return {
+            definions: this.definions,
+            factories: this.factories,
+            instances: this.instances,
+          };
         }
 
-        if (this.factories.has(member)) {
-            const factory = this.factories.get(member);
+        return target[property] || isSymbol(property)
+          ? target[property]
+          : target.get(property);
+      },
+    });
+  }
 
-            this.factories.set(
-                member,
-                () => extender(
-                    factory(this.proxy),
-                    this.proxy,
-                ),
-            );
+  /**
+   * Binds a service to the implementation.
+   *
+   * @param {string} serviceId
+   * @param {Function|object} serviceFactory
+   * @returns {void}
+   */
+  bind(serviceId, serviceFactory) {
+    this.definions.set(serviceId, serviceFactory);
+  }
 
-            return;
-        }
+  factory(member, definion) {
+    this.factories.set(member, definion);
+  }
 
-        throw new UnknownMemberError(member);
+  extend(member, extender) {
+    if (this.definions.has(member)) {
+      const definion = this.definions.get(member);
+
+      this.definions.set(
+        member,
+        () => extender(
+          definion(this.proxy),
+          this.proxy,
+        ),
+      );
+
+      return;
     }
 
-    register(serviceProvider) {
-        if (serviceProvider && serviceProvider.register instanceof Function) {
-            serviceProvider.register(this);
-            return;
-        }
+    if (this.factories.has(member)) {
+      const factory = this.factories.get(member);
 
-        if (serviceProvider instanceof Function) {
-            serviceProvider(this);
-            return;
-        }
+      this.factories.set(
+        member,
+        () => extender(
+          factory(this.proxy),
+          this.proxy,
+        ),
+      );
 
-        throw new UnsupportedServiceProviderError();
+      return;
     }
 
-    get(member) {
-        if (this.instances.has(member)) {
-            return this.instances.get(member);
-        }
+    throw new UnknownMemberError(member);
+  }
 
-        if (this.factories.has(member)) {
-            const factory = this.factories.get(member);
-            return factory(this.proxy);
-        }
-
-        if (this.definions.has(member)) {
-            const definion = this.definions.get(member);
-
-            if (definion instanceof Function) {
-                const instance = definion(this.proxy);
-                this.instances.set(member, instance);
-                return instance;
-            }
-
-            return definion;
-        }
-
-        throw new UnknownMemberError(member);
+  /**
+   * Connect a service provider to the container.
+   *
+   * @param {Function|object} serviceProvider
+   */
+  use(serviceProvider) {
+    if (serviceProvider instanceof Function) {
+      serviceProvider(this);
+      return;
     }
+
+    throw new UnsupportedServiceProviderError();
+  }
+
+  /**
+   * Retrieve an instance of the service.
+   *
+   * @param {string} serviceId Service ID
+   * @returns {object} Service instance.
+   * @throws {UnknownMemberError} Thrown if the service is not registered.
+   */
+  get(serviceId) {
+    if (this.instances.has(serviceId)) {
+      return this.instances.get(serviceId);
+    }
+
+    if (this.factories.has(serviceId)) {
+      const factory = this.factories.get(serviceId);
+      return factory(this.proxy);
+    }
+
+    if (this.definions.has(serviceId)) {
+      const definion = this.definions.get(serviceId);
+
+      if (definion instanceof Function) {
+        const instance = definion(this.proxy);
+        this.instances.set(serviceId, instance);
+        return instance;
+      }
+
+      return definion;
+    }
+
+    throw new UnknownMemberError(serviceId);
+  }
 }
 
 module.exports = {
-    Container,
+  Container,
 };
