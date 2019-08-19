@@ -1,13 +1,13 @@
 const { Container } = require('../src');
 
 const letterService = (container) => {
-    container.letterRepository = () => ({
-        list: () => ['A', 'B', 'C'],
-    });
+  container.letterRepository = () => ({
+    list: () => ['A', 'B', 'C'],
+  });
 
-    container.letterController = ({ letterRepository }) => ({
-        showList: () => letterRepository.list(),
-    });
+  container.letterController = ({ letterRepository }) => ({
+    showList: () => letterRepository.list(),
+  });
 };
 
 const container = new Container();
